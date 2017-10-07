@@ -34,19 +34,12 @@ class HnList {
 
     async getItems({ from, amount }) {
         let response = await this.getIds({ from, amount });
-        let { start, end, items, total } = response;
-        let promises = items.map(id => {
+        let promises = response.items.map(id => {
             let item = new HnItem(id);
             return item.fetch()
         });
-        items = await Promise.all(promises);
-        return {
-            start,
-            end,
-            amount,
-            items,
-            total
-        };
+        response.items = await Promise.all(promises);
+        return response;
     }
 }
 
