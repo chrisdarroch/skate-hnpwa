@@ -1,0 +1,24 @@
+{
+  "name": "skate5-hnpwa",
+  "version": "1.0.0",
+  "description": "The HNPWA app built using Skate.",
+  "main": "index.js",
+  "author": "Christopher Darroch <christopher.darroch@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "^8",
+    "yarn": "^1.1"
+  },
+  "dependencies": {
+    "@skatejs/renderer-lit-html": "^0.0.0",
+    "node-fetch": "^1.7.3",
+    "restify": "^6.0.1",
+    "skatejs": "^5.0.0-beta.3"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
+  }
+}
