@@ -1,3 +1,3 @@
 const HnList = require('../entities/hn-list');
 
-module.exports = new HnList('topstories');
+module.exports = new HnList('askstories');
