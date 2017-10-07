@@ -6,25 +6,47 @@ class HnList {
         this._type = type;
     }
 
-    async getIds({ from, amount }) {
-        from = parseInt(from, 10);
-        amount = parseInt(amount, 10);
-
+    fetch() {
         return fetch(`https://hacker-news.firebaseio.com/v0/${this._type}.json`)
             .then(res => res.json())
-            .then(ids => ids.slice(from, from + amount))
             .catch(err => {
                 throw new Error(err);
             });
     }
 
+    async getIds({ from, amount }) {
+        amount = parseInt(amount, 10);
+        let start = parseInt(from, 10);
+        let end = start + amount;
+
+        let all = await this.fetch();
+        let total = all.length;
+        let items = all.slice(start, end);
+
+        return {
+            start,
+            end,
+            amount,
+            items,
+            total
+        };
+    }
+
     async getItems({ from, amount }) {
-        let ids = await this.getIds({ from, amount });
-        let promises = ids.map(id => {
+        let response = await this.getIds({ from, amount });
+        let { start, end, items, total } = response;
+        let promises = items.map(id => {
             let item = new HnItem(id);
             return item.fetch()
         });
-        return Promise.all(promises);
+        items = await Promise.all(promises);
+        return {
+            start,
+            end,
+            amount,
+            items,
+            total
+        };
     }
 }
 
