@@ -15,6 +15,11 @@
     "restify": "^6.0.1",
     "skatejs": "^5.0.0-beta.3"
   },
+  "scripts": {
+    "build": "yarn build:server",
+    "build:server": "babel --out-dir node/server src/server",
+    "start": "yarn build && node node/server/index.js"
+  },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
