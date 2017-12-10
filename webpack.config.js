@@ -17,20 +17,13 @@ module.exports = {
     },
     devtool: 'source-map',
     entry: {
-      'main': './index.js'
+      'main': ['babel-polyfill', './index.js']
     },
     module: {
       rules: [
         {
           test: /\.js$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              plugins: [
-                'transform-skate-flow-props'
-              ],
-            }
-          }
+          use: 'babel-loader',
         },
         {
           test: /\.css$/,
