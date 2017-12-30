@@ -3,6 +3,7 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
+import NewsItem from './news-item';
 
 function getItems(type) {
     // todo: set or inject the base URL during compilation.
@@ -30,9 +31,10 @@ export default class NewsList extends BaseComponent {
                         ${repeat(
                         items,
                         item => item.id,
-                        item => {
-                            return html`<li class="hnlist--item">${item.title}</li>`;
-                        }
+                        item => html`
+                            <li class="hnlist--item">
+                                <hnpwa-item id="${item.id}" title="${item.title}" url="${item.url}" />
+                            </li>`
                         )}
                     </ul>
                 `;
