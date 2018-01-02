@@ -4,6 +4,22 @@ import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 
+export function renderItem(props) {
+    return html`
+        <li class="hnitem">
+            <a href="${props.url}">
+                <h1 class="hnitem__title">${props.title}</h1>
+            </a>
+            <ul class="hnitem__metadata">
+                <li class="metadata__author">by <span>${props.by}</a></li>
+                <li class="metadata__time"><time datetime="${props.time}">${new Date(props.time * 1000)}</time></li>
+                <li class="metadata__score"><span>${props.score}</span> points</li>
+                <li class="metadata__comments"><a href="/item/${props.id}">comments</a></li>
+            </ul>
+        </li>
+    `;
+}
+
 export default class NewsItem extends BaseComponent {
     static is = 'hnpwa-item'
     static props = {
@@ -15,13 +31,7 @@ export default class NewsItem extends BaseComponent {
         Object.assign(this.props, props);
     }
     render() {
-        return html`
-        <article class="hnitem">
-            <a href="${this.url}">
-                <h1 class="hnitem--title">${this.title}</h1>
-            </a>
-        </article>
-        `
+        return html`<article class="hnitem">${renderItem(this)}</article>`
     }
 }
 
