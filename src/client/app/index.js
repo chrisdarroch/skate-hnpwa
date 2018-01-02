@@ -1,8 +1,6 @@
-import NewsList from '../components/news-list';
+import NewsList from '../components/news-app';
 
 document.body.classList.remove('no-js');
 
-const list = document.createElement('hnpwa-list');
-list.type = 'top';
-
-document.getElementById('page').appendChild(list);
+const app = document.createElement('hnpwa-app');
+document.getElementById('page').appendChild(app);
