@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const contextPath = path.join(__dirname, 'src', 'client');
 const publicPath = path.join(__dirname, 'public');
@@ -17,7 +18,7 @@ module.exports = {
     },
     devtool: 'source-map',
     entry: {
-      'main': ['babel-polyfill', './index.js']
+      'main': ['babel-polyfill', './index.js'],
     },
     module: {
       rules: [
@@ -59,15 +60,23 @@ module.exports = {
       publicPath: '/'
     },
     plugins: [
-        extractCssPlugin,
-        new webpack.optimize.CommonsChunkPlugin({
+      extractCssPlugin,
+      new webpack.optimize.CommonsChunkPlugin({
         children: true,
         deepChildren: true,
         filename: 'hnpwa.[name].js',
         minChunks: 2,
         name: 'main'
-      })
-      // new WebpackPrerenderPlugin()
+      }),
+      // new WebpackPrerenderPlugin(),
+      new SWPrecacheWebpackPlugin({
+        cacheId: 'skate-hnpwa',
+        filename: 'sw.js',
+        staticFileGlobsIgnorePatterns: [
+          /\.map$/,
+          /asset-manifest\.json$/,
+        ],
+      }),
     ]
   };
   
