@@ -18,9 +18,9 @@
   },
   "scripts": {
     "build": "yarn build:server && yarn build:client",
-    "build:client": "webpack -p",
+    "build:client": "echo 'not done yet'",
     "build:server": "babel --out-dir node/server src/server",
-    "start:client": "yarn build:client && webpack-dev-server --hot",
+    "start:client": "yarn build:client && echo 'not done yet",
     "start:server": "yarn build:server && node node/server/index.js",
     "start": "./bin/startup.sh"
   },
@@ -35,17 +35,9 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.5",
-    "img-loader": "^2.0.0",
     "lit-html": "^0.7.1",
     "postcss-loader": "^2.0.9",
     "precss": "^2.0.0",
-    "restify-cors-middleware": "^1.0.1",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
-    "worker-loader": "^1.1.0"
+    "restify-cors-middleware": "^1.0.1"
   }
 }
