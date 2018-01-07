@@ -67,3 +67,7 @@ typings/
 
 ## Ignore generated server code
 node/
+
+## Ignore parcel-generated code
+.cache/
+dist/

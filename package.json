@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@skatejs/renderer-lit-html": "^0.1.1",
+    "@webcomponents/webcomponentsjs": "https://github.com/WebComponents/webcomponentsjs",
     "node-cache": "^4.1.1",
     "node-fetch": "^1.7.3",
     "restify": "^6.3.4",
@@ -36,6 +37,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "lit-html": "^0.7.1",
+    "parcel-bundler": "^1.4.1",
     "postcss-loader": "^2.0.9",
     "precss": "^2.0.0",
     "restify-cors-middleware": "^1.0.1"
