@@ -1,0 +1,31 @@
+.hnitem {
+    list-style: none;
+    margin-top: 2em;
+}
+
+.hnitem:first-child {
+    margin-top: 0;
+}
+
+.hnitem__title {
+    font-size: 1em;
+    margin: 0;
+}
+
+.hnitem__metadata {
+    color: #aaa;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hnitem__metadata > *::before {
+    content: "|";
+    padding: 0 0.5em;
+}
+
+.hnitem__metadata > *:first-child::before {
+    content: none;
+}

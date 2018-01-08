@@ -3,6 +3,7 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
+import './news-item.css';
 
 export function renderItem(props) {
     return html`
