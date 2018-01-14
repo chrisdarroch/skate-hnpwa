@@ -1,10 +1,11 @@
 import { html } from 'lit-html';
 import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
-import { withComponent, props } from 'skatejs';
-import withLitHtml from '@skatejs/renderer-lit-html';
-
-const Component = withComponent(withLitHtml());
+import { define, props } from 'skatejs';
+import BaseComponent from './base-component';
+import { NewsItem, renderItem } from './news-item';
+import './news-list.css';
+import './news-item.css';
 
 function getItems(type) {
     // todo: set or inject the base URL during compilation.
@@ -14,7 +15,8 @@ function getItems(type) {
         .then(data => data.items);
 }
 
-export default class Lister extends Component {
+export default class NewsList extends BaseComponent {
+    static is = 'hnpwa-list'
     static props = {
         type: props.string
     };
@@ -28,13 +30,7 @@ export default class Lister extends Component {
             getItems(this.props.type).then(items => {
                 return html`
                     <ul class="hnlist">
-                        ${repeat(
-                        items,
-                        item => item.id,
-                        item => {
-                            return html`<li class="hnlist--item">${item.title}</li>`;
-                        }
-                        )}
+                        ${repeat(items, item => item.id, renderItem)}
                     </ul>
                 `;
             }),
@@ -44,3 +40,5 @@ export default class Lister extends Component {
         )}`;
     }
 };
+
+define(NewsList);

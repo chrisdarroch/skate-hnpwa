@@ -1,4 +1,23 @@
 body {
+    background-color: #f2f5eb;
+    font-family: Helvetica, Arial, sans-seric;
+    font-size: 1.4em;
+    font-weight: 100;
+    line-height: 1.7em;
     margin: 0;
     padding: 0;
+}
+
+a, a:link, a:visited {
+    color: #f2567c;
+}
+
+:-moz-focusring {
+    color: #f2567c;
+}
+:focus {
+    outline-color: #f2567c;
+}
+:focus-visible {
+    color: #f2567c;
 }

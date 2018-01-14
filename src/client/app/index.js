@@ -1,8 +1,6 @@
-import Lister from '../components/lister';
-
-customElements.define('hnpwa-list', Lister);
-const list = document.createElement('hnpwa-list');
-list.type = 'top';
+import NewsList from '../components/news-app';
 
 document.body.classList.remove('no-js');
-document.body.appendChild(list);
+
+const app = document.createElement('hnpwa-app');
+document.getElementById('page').appendChild(app);
