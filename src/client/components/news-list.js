@@ -4,6 +4,7 @@ import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 import { NewsItem, renderItem } from './news-item';
+import './news-list.css';
 import './news-item.css';
 
 function getItems(type) {

@@ -1,0 +1,9 @@
+.hnlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hnlist .hnitem {
+    padding: 0 1em;
+}
