@@ -2,6 +2,7 @@ import { html } from 'lit-html';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 import NewsList from './news-list';
+import './news-app.css';
 
 const menu = [
     ['top', 'Hacker News'],
@@ -32,8 +33,8 @@ export default class NewsApp extends BaseComponent {
     }
     render({ state }) {
         return html`
-        <header>
-            <nav>
+        <header id="header">
+            <nav id="navigation">
                 <ul>
                     ${menu.map(([url, name]) => {
                         let selected = (state.route === url);
