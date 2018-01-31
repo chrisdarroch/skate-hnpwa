@@ -2,6 +2,7 @@ import { html } from 'lit-html';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 import NewsList from './news-list';
+import NewsItem from './news-item';
 import './news-app.css';
 
 const menu = [
@@ -13,6 +14,8 @@ const menu = [
     ['job', 'Jobs']
 ];
 
+const routes = new RegExp("^/(.*?)(?:/(.*?)$|$)");
+
 export default class NewsApp extends BaseComponent {
     static is = 'hnpwa-app'
     state = {
@@ -23,7 +26,13 @@ export default class NewsApp extends BaseComponent {
             let el = e.target;
             if (el && el.nodeName === 'A') {
                 e.preventDefault();
-                this.state.route = el.getAttribute('href').replace(/^\//,'')
+                let [match, route, id] = routes.exec(el.getAttribute('href'));
+                if (route === 'item') {
+                    this.state.item = { id };
+                } else {
+                    this.state.item = undefined;
+                }
+                this.state.route = route;
                 this.updated();
             }
         });
@@ -47,7 +56,10 @@ export default class NewsApp extends BaseComponent {
                 </ul>
             </nav>
         </header>
-        <hnpwa-list type="${state.route}" />
+        ${state.item
+            ? html`<hnpwa-item id="${state.item.id}" />`
+            : html`<hnpwa-list type="${state.route}" />`
+        }
         `
     }
 }
