@@ -39,10 +39,6 @@ export default class NewsItem extends BaseComponent {
         title: props.string,
         url: props.string,
     }
-    constructor(props) {
-        super();
-        Object.assign(this.props, props);
-    }
     render() {
         if (!this.props.id) {
             return html`<p>I can't render that, Hal.</p>`;

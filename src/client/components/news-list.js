@@ -20,10 +20,6 @@ export default class NewsList extends BaseComponent {
     static props = {
         type: props.string
     };
-    constructor(type) {
-        super();
-        this.props.type = type;
-    }
     render() {
         return html`
         ${until(
