@@ -30,7 +30,7 @@ export default class NewsList extends BaseComponent {
             getItems(this.props.type).then(items => {
                 return html`
                     <ul class="hnlist">
-                        ${repeat(items, item => item.id, renderItem)}
+                        ${repeat(items, item => item.id, (props) => renderItem(props))}
                     </ul>
                 `;
             }),
