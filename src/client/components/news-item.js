@@ -3,6 +3,7 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
+import './comment';
 import './news-item.css';
 
 export function renderItem(props, renderCommentLink = true) {
@@ -12,7 +13,7 @@ export function renderItem(props, renderCommentLink = true) {
                 <h1 class="hnitem__title">${props.title}</h1>
             </a>
             <ul class="hnitem__metadata">
-                <li class="metadata__author">by <span>${props.by}</a></li>
+                <li class="metadata__author">by <span>${props.by}</span></li>
                 <li class="metadata__time"><time datetime="${props.time}">${new Date(props.time * 1000)}</time></li>
                 <li class="metadata__score"><span>${props.score}</span> points</li>
                 ${renderCommentLink
@@ -46,7 +47,12 @@ export default class NewsItem extends BaseComponent {
         return html`
         ${until(
             getArticle(this.props.id).then(article =>
-                html`<article class="hnitem">${renderItem(article, false)}</article>`
+                html`
+                    <article class="hnitem">${renderItem(article, false)}</article>
+                    <section class="hnitem__comments">
+                        ${repeat(article.kids, id => id, id => html`<hnpwa-comment id=${id} />`)}
+                    </section>
+                `
             ),
             html`📖 let's see what people have to say about this...`
         )}

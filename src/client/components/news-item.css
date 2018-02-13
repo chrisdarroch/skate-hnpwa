@@ -29,3 +29,7 @@
 .hnitem__metadata > *:first-child::before {
     content: none;
 }
+
+.hnitem__comments {
+    margin-top: 1em;
+}
