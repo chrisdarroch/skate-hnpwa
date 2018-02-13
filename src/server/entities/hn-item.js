@@ -25,6 +25,11 @@ class HnItem {
                 throw new Error(err);
             })
     };
+
+    async getArticle() {
+        let data = await this.fetch();
+        return data;
+    }
 }
 
 module.exports = HnItem;

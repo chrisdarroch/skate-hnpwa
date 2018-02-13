@@ -41,6 +41,15 @@ server.use(cors.actual);
     server.get(route, respondWith(router));
 });
 
+// Construct a route for retrieving individual news stories
+server.get('/api/item/:id', async (req, res, next) => {
+    let getItem = require('./routes/item');
+    let item = getItem(req.params.id);
+    let result = await item.getArticle();
+    res.send(result);
+    return next();
+});
+
 // Start the server!
 server.listen(PORT, () => {
     console.log(`listening on ${PORT}`);

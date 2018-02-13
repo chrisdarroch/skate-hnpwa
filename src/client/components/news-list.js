@@ -20,17 +20,13 @@ export default class NewsList extends BaseComponent {
     static props = {
         type: props.string
     };
-    constructor(type) {
-        super();
-        this.props.type = type;
-    }
     render() {
         return html`
         ${until(
             getItems(this.props.type).then(items => {
                 return html`
                     <ul class="hnlist">
-                        ${repeat(items, item => item.id, renderItem)}
+                        ${repeat(items, item => item.id, (props) => renderItem(props))}
                     </ul>
                 `;
             }),
