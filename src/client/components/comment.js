@@ -24,10 +24,10 @@ function renderReplies(article) {
 
 export default class Comment extends BaseComponent {
     static is = 'hnpwa-comment'
-    static props = {
-        id: props.id,
+    static get props() {
+        return { id: props.id };
     }
-    render() {
+    render({ props, state }) {
         if (!this.props.id) {
             return html`<p>I can't render that, Hal.</p>`;
         }
@@ -47,7 +47,7 @@ export default class Comment extends BaseComponent {
                     </div>
                 `
             ),
-            html`📖 let's see what people have to say about this...`
+            html`📖 let's see what people said in response...`
         )}
         `;
     }

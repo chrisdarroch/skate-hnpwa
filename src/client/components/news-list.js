@@ -17,16 +17,16 @@ function getItems(type) {
 
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
-    static props = {
-        type: props.string
-    };
-    render() {
+    static get props() {
+        return { type: props.string };
+    }
+    render({ props, state }) {
         return html`
         ${until(
-            getItems(this.props.type).then(items => {
+            getItems(props.type).then(items => {
                 return html`
                     <ul class="hnlist">
-                        ${repeat(items, item => item.id, (props) => renderItem(props))}
+                        ${repeat(items, item => item.id, (props, i) => renderItem(props))}
                     </ul>
                 `;
             }),

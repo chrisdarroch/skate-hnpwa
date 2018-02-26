@@ -35,18 +35,20 @@ function getArticle(id) {
 
 export default class NewsItem extends BaseComponent {
     static is = 'hnpwa-item'
-    static props = {
-        id: props.id,
-        title: props.string,
-        url: props.string,
+    static get props() {
+        return {
+            id: props.id,
+            title: props.string,
+            url: props.string,
+        };
     }
-    render() {
-        if (!this.props.id) {
+    render({ props, state }) {
+        if (!props.id) {
             return html`<p>I can't render that, Hal.</p>`;
         }
         return html`
         ${until(
-            getArticle(this.props.id).then(article =>
+            getArticle(props.id).then(article =>
                 html`
                     <article class="hnitem">${renderItem(article, false)}</article>
                     <section class="hnitem__comments">
