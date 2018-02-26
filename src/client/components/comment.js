@@ -33,20 +33,21 @@ export default class Comment extends BaseComponent {
         }
         return html`
         ${until(
-            getArticle(this.props.id).then(article =>
-                html`
+            getArticle(this.props.id).then(article => {
+                let commentBody = document.createElement('div');
+                commentBody.className = 'hncomment__content';
+                commentBody.innerHTML = article.text;
+                return html`
                     <div class="hncomment">
                         <ul class="hnitem__metadata">
                             <li class="metadata__author">by <span>${article.by}</span></li>
                             <li class="metadata__time"><time datetime="${article.time}">${new Date(article.time * 1000)}</time></li>
                         </ul>
-                        <div class="hncomment__content">
-                            ${article.text}
-                        </div>
+                        ${commentBody}
                         ${renderReplies(article)}
                     </div>
-                `
-            ),
+                `;
+            }),
             html`📖 let's see what people said in response...`
         )}
         `;
