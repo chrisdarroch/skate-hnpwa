@@ -1,5 +1,6 @@
 import { html } from 'lit-html';
-import { define, props } from 'skatejs';
+import { define, name, props } from 'skatejs';
+import { Route, Router, Link } from '@skatejs/sk-router';
 import BaseComponent from './base-component';
 import NewsList from './news-list';
 import NewsItem from './news-item';
@@ -14,47 +15,18 @@ const menu = [
     ['job', 'Jobs']
 ];
 
-const routes = new RegExp("^/(.*?)(?:/(.*?)$|$)");
+class RoutedNewsList extends NewsList {
+    static is = 'hnpwa-routed-newslist'
+    render({ props, state }) {
+        let { params } = props;
+        let type = params && params.type || 'top';
+        return super.render({ props: { type }, state });
+    }
+}
+define(RoutedNewsList);
 
 export default class NewsApp extends BaseComponent {
     static is = 'hnpwa-app'
-    state = {
-        route: 'top'
-    }
-    connected() {
-        window.history.replaceState(this.state, 'Skate HNPWA', window.location.href);
-        this.renderRoot.addEventListener('click', e => {
-            let el = e.target;
-            if (el && el.matches('a[href^="/"]')) {
-                const href = el.getAttribute('href');
-                const [match, route, id] = routes.exec(href);
-                if (route) {
-                    if (route === 'item') {
-                        this.state.item = { id };
-                    } else {
-                        this.state.item = undefined;
-                    }
-                    if (route !== this.state.route) {
-                        this.state.route = route;
-                        window.history.pushState(this.state, 'Skate HNPWA', href);
-                    }
-                }
-                this.updated();
-                e.preventDefault();
-            }
-        });
-        window.onpopstate = (e) => {
-            const state = e.state;
-            if (state) {
-                this.state = state;
-                this.updated();
-            }
-        }
-    }
-    disconnected() {
-        this.renderRoot.removeEventListener('click');
-        window.onpopstate = undefined;
-    }
     render({ state }) {
         return html`
         <header id="header">
@@ -64,7 +36,7 @@ export default class NewsApp extends BaseComponent {
                         let selected = (state.route === url);
                         return html`
                         <li>
-                            <a class="${selected ? 'selected' : '' }" href="/${url}">${name}</a>
+                            <sk-link classNames="${selected ? 'selected' : '' }" href="/${url}">${name}</a>
                         </li>
                         `
                     })}
@@ -72,10 +44,11 @@ export default class NewsApp extends BaseComponent {
             </nav>
         </header>
         <section id="content">
-        ${state.item
-            ? html`<hnpwa-item id="${state.item.id}" />`
-            : html`<hnpwa-list type="${state.route}" />`
-        }
+            <sk-router>
+                <sk-route path="/item/:id" page="${NewsItem}"></sk-route>
+                <sk-route path="/:type" page="${RoutedNewsList}"></sk-route>
+                <sk-route path="/" page="${RoutedNewsList}"></sk-route>
+            </sk-router>
         </section>
         `
     }

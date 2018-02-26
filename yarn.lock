@@ -6,6 +6,18 @@
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@skatejs/renderer-lit-html/-/renderer-lit-html-0.1.1.tgz#c7fbb03041bb6b7b4010c39ef97c28bee0ce10dd"
 
+"@skatejs/sk-router@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@skatejs/sk-router/-/sk-router-0.2.0.tgz#ba332c323b9b1deca3476da14aa3eb4ef1b9fbfe"
+  dependencies:
+    "@skatejs/val" "^0.3.1"
+    page "^1.7.1"
+    skatejs "^5.0.0-beta.4"
+
+"@skatejs/val@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@skatejs/val/-/val-0.3.1.tgz#1e043fdcd22ac3d1deab69ef7432314f38ce9f98"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -4630,6 +4642,12 @@ p-pipe@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/p-pipe/-/p-pipe-1.2.0.tgz#4b1a11399a11520a67790ee5a0c1d5881d6befe9"
 
+page@^1.7.1:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/page/-/page-1.8.3.tgz#cc46fd6e614f5a60ebc68d0e0e3570301dae7c0e"
+  dependencies:
+    path-to-regexp "~1.2.1"
+
 pako@~1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
@@ -4701,6 +4719,12 @@ path-key@^2.0.0:
 path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+
+path-to-regexp@~1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.2.1.tgz#b33705c140234d873c8721c7b9fd8b541ed3aff9"
+  dependencies:
+    isarray "0.0.1"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -5812,7 +5836,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-skatejs@^5.1.1:
+skatejs@^5.0.0-beta.4, skatejs@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/skatejs/-/skatejs-5.1.1.tgz#e253b676a26f0aac9565df7043f9878f9fa0518d"
 

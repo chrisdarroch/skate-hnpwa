@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@skatejs/renderer-lit-html": "^0.1.1",
+    "@skatejs/sk-router": "^0.2.0",
     "node-cache": "^4.1.1",
     "node-fetch": "^1.7.3",
     "restify": "^6.3.4",
