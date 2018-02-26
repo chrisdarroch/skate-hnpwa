@@ -56,10 +56,12 @@ export default class NewsApp extends BaseComponent {
                 </ul>
             </nav>
         </header>
+        <section id="content">
         ${state.item
             ? html`<hnpwa-item id="${state.item.id}" />`
             : html`<hnpwa-list type="${state.route}" />`
         }
+        </section>
         `
     }
 }

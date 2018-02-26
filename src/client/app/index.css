@@ -1,15 +1,20 @@
 body {
     background-color: #f2f5eb;
-    font-family: Helvetica, Arial, sans-seric;
-    font-size: 1.4em;
-    font-weight: 100;
-    line-height: 1.7em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: lighter;
+    line-height: 1.5em;
     margin: 0;
     padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
 a, a:link, a:visited {
     color: #f2567c;
+    text-decoration: none;
 }
 
 :-moz-focusring {
@@ -20,4 +25,9 @@ a, a:link, a:visited {
 }
 :focus-visible {
     color: #f2567c;
+}
+
+/* todo: define within each component once there's a nice way to inject style blocks via webpack */
+hnpwa-app, hnpwa-list, hnpwa-item, hnpwa-comment {
+    display: block;
 }
