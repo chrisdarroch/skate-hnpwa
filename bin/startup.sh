@@ -1,5 +1,11 @@
 #! /bin/sh
 
-yarn build
-node node/server/index.js &
-webpack-dev-server --hot
+yarn server/build
+if [[ ${NODE_ENV} = "production" ]]; then
+    yarn client/build
+else
+    yarn client/watch &
+fi
+
+yarn server/run &
+yarn client/run
