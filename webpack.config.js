@@ -19,6 +19,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
       'main': ['babel-polyfill', './index.js'],
+      'sw': ['./sw/index.js']
     },
     module: {
       rules: [
@@ -72,6 +73,9 @@ module.exports = {
       new SWPrecacheWebpackPlugin({
         cacheId: 'skate-hnpwa',
         filename: 'sw.js',
+        importScripts: [
+          { chunkName: 'sw' },
+        ],
         staticFileGlobsIgnorePatterns: [
           /\.map$/,
           /asset-manifest\.json$/,
