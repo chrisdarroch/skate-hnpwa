@@ -24,7 +24,7 @@ export default class NewsApp extends BaseComponent {
     connected() {
         this.renderRoot.addEventListener('click', e => {
             let el = e.target;
-            if (el && el.nodeName === 'A') {
+            if (el && el.matches('a[href^="/"]')) {
                 e.preventDefault();
                 let [match, route, id] = routes.exec(el.getAttribute('href'));
                 if (route === 'item') {
