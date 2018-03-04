@@ -22,23 +22,38 @@ export default class NewsApp extends BaseComponent {
         route: 'top'
     }
     connected() {
+        window.history.replaceState(this.state, 'Skate HNPWA', window.location.href);
         this.renderRoot.addEventListener('click', e => {
             let el = e.target;
             if (el && el.matches('a[href^="/"]')) {
-                e.preventDefault();
-                let [match, route, id] = routes.exec(el.getAttribute('href'));
-                if (route === 'item') {
-                    this.state.item = { id };
-                } else {
-                    this.state.item = undefined;
+                const href = el.getAttribute('href');
+                const [match, route, id] = routes.exec(href);
+                if (route) {
+                    if (route === 'item') {
+                        this.state.item = { id };
+                    } else {
+                        this.state.item = undefined;
+                    }
+                    if (route !== this.state.route) {
+                        this.state.route = route;
+                        window.history.pushState(this.state, 'Skate HNPWA', href);
+                    }
                 }
-                this.state.route = route;
                 this.updated();
+                e.preventDefault();
             }
         });
+        window.onpopstate = (e) => {
+            const state = e.state;
+            if (state) {
+                this.state = state;
+                this.updated();
+            }
+        }
     }
     disconnected() {
         this.renderRoot.removeEventListener('click');
+        window.onpopstate = undefined;
     }
     render({ state }) {
         return html`
