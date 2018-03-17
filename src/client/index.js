@@ -1,4 +1,3 @@
-import 'file-loader!./index.html';
 import '!file-loader?name=ce-es5-shim.js!./fills/ce-es5-shim.js';
 import '!file-loader?name=ce-sd-fill.js!./fills/ce-sd-fill.js';
 import './app/index.css';

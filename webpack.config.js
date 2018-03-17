@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 const contextPath = path.join(__dirname, 'src', 'client');
 const publicPath = path.join(__dirname, 'public');
@@ -19,7 +20,6 @@ module.exports = {
     devtool: 'source-map',
     entry: {
       'main': ['babel-polyfill', './index.js'],
-      'sw': ['./sw/index.js']
     },
     module: {
       rules: [
@@ -43,7 +43,7 @@ module.exports = {
         },
         {
           test: /\.html$/,
-          loaders: 'file-loader?{ name: "[path][name].[ext]"}'
+          loaders: 'html-loader'
         },
         {
           test: /\.png$/,
@@ -69,18 +69,30 @@ module.exports = {
         minChunks: 2,
         name: 'main'
       }),
-      // new WebpackPrerenderPlugin(),
-      new SWPrecacheWebpackPlugin({
-        cacheId: 'skate-hnpwa',
-        filename: 'sw.js',
-        importScripts: [
-          { chunkName: 'sw' },
-        ],
-        staticFileGlobsIgnorePatterns: [
+      new HtmlWebpackPlugin({
+        cache: true,
+        template: 'index.html',
+      }),
+      new WorkboxWebpackPlugin.GenerateSW({
+        // logistical build-time stuff
+        swDest: 'sw.js',
+        importWorkboxFrom: 'local', // not that I distrust Google's CDN, but I want all the files in one place for now.
+        excludeChunks: ['sw'],
+        exclude: [
           /\.map$/,
           /asset-manifest\.json$/,
         ],
+        // runtime stuff
+        cacheId: 'skate-hnpwa',
+        clientsClaim: true, // run the SW on pages immediately when it activates
+        skipWaiting: true, // because we're claiming the client immediately
+        runtimeCaching: [{
+          urlPattern: new RegExp('^http://localhost:8000/api/'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'skate-hnpwa-data',
+          }
+        }]
       }),
     ]
-  };
-  
+};

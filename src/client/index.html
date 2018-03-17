@@ -9,7 +9,6 @@
 
         <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
-        <link rel="stylesheet" href="hnpwa.main.css">
     </head>
     <body>
         <!--[if lte IE 9]>
@@ -17,7 +16,6 @@
         <![endif]-->
 
         <div id="page"></div>
-        <script src="hnpwa.main.js"></script>
         <script>
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/sw.js').then(function(registration) {
