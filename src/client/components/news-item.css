@@ -14,15 +14,20 @@
 
 .hnitem__metadata {
     color: #aaa;
-    display: flex;
+    display: inline-block;
+    font-size: 0.7rem;
     flex-direction: row;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+.hnitem__metadata > * {
+    display: inline;
+}
+
 .hnitem__metadata > *::before {
-    content: "|";
+    content: "•";
     padding: 0 0.5em;
 }
 

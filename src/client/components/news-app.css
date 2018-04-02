@@ -1,5 +1,5 @@
 :root {
-    --header-height: 50px;
+    --header-height: 3em;
 }
 
 #navigation {
@@ -25,6 +25,7 @@
 
 #navigation a {
     display: block;
+    font-size: 0.6rem;
     line-height: var(--header-height);
     padding: 0 1em;
 }
@@ -36,4 +37,10 @@
 #header + #content {
     display: block;
     margin-top: 2em;
+}
+
+@media screen and (min-width: 36rem) {
+    #navigation a {
+        font-size: 1rem;
+    }
 }

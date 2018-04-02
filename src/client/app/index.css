@@ -1,11 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #f2f5eb;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: lighter;
-    line-height: 1.5em;
-    margin: 0;
-    padding: 0;
+    line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,4 +37,10 @@ a, a:link, a:visited {
 /* todo: define within each component once there's a nice way to inject style blocks via webpack */
 hnpwa-app, hnpwa-list, hnpwa-item, hnpwa-comment {
     display: block;
+}
+
+@media screen and (min-width: 36rem) {
+    body {
+        font-size: 1.2rem;
+    }
 }
