@@ -5,6 +5,7 @@ import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 import './comment.css';
 import unrenderableFragment from './fragments/unrenderable-fragment';
+import timeFragment from './fragments/time-fragment';
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
@@ -42,7 +43,7 @@ export default class Comment extends BaseComponent {
                     <div class="hncomment">
                         <ul class="hnitem__metadata">
                             <li class="metadata__author">by <span>${article.by}</span></li>
-                            <li class="metadata__time"><time datetime="${article.time}">${new Date(article.time * 1000)}</time></li>
+                            <li class="metadata__time">${timeFragment(article.time)}</li>
                         </ul>
                         ${commentBody}
                         ${renderReplies(article)}
