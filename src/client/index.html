@@ -6,10 +6,6 @@
         <title>Skate HNPWA</title>
         <meta name="description" content="A web-component HackerNews client built using skate.js">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="apple-touch-icon" href="icon.png">
-        <link rel="stylesheet" href="hnpwa.main.css">
     </head>
     <body>
         <!--[if lte IE 9]>
@@ -17,6 +13,16 @@
         <![endif]-->
 
         <div id="page"></div>
-        <script src="hnpwa.main.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }).catch(function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            }
+        </script>
     </body>
 </html>

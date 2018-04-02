@@ -4,6 +4,7 @@ import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
 import './comment.css';
+import unrenderableFragment from './fragments/unrenderable-fragment';
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
@@ -29,7 +30,7 @@ export default class Comment extends BaseComponent {
     }
     render({ props, state }) {
         if (!this.props.id) {
-            return html`<p>I can't render that, Hal.</p>`;
+            return unrenderableFragment();
         }
         return html`
         ${until(
