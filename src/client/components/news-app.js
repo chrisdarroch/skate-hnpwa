@@ -23,8 +23,8 @@ export default class NewsApp extends BaseComponent {
         menuItems.forEach(function({id, path}) {
             router.handle(path, () => result(html`<hnpwa-list type="${id}" />`));
         });
+        router.handle(routes.root.path, () => result(html`<hnpwa-list type="top" />`));
         router.handle(routes.item.path, (ctx) => result(html`<hnpwa-item id="${ctx.params.id}" />`));
-        router.handle(routes.root.path, routes.top.path);
     }
     connected() {
         router.start();

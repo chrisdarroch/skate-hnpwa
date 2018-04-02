@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const contextPath = path.join(__dirname, 'src', 'client');
 const publicPath = path.join(__dirname, 'public');
@@ -73,6 +74,17 @@ module.exports = {
       new HtmlWebpackPlugin({
         cache: true,
         template: 'index.html',
+      }),
+      new WebpackPwaManifest({
+        name: 'Skate HackerNews PWA Demo',
+        short_name: 'Skate HNPWA',
+        background_color: '#f2f5eb', // todo: extract common value from CSS in to JS
+        filename: 'site.webmanifest',
+        inject: true,
+        icons: [{
+          src: path.resolve(__dirname, 'src', 'client', 'app', 'skatejs@2x.png'),
+          sizes: [16, 32, 64, 48, 96, 128, 256, 384, 512]
+        }],
       }),
       new WorkboxWebpackPlugin.InjectManifest({
         // logistical build-time stuff
