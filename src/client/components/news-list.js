@@ -3,7 +3,9 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
-import { NewsItem, renderItem } from './news-item';
+import NewsItem from './news-item';
+import itemFragment from './fragments/news-item-fragment';
+import errorFragment from './fragments/error-fragment';
 import './news-list.css';
 import './news-item.css';
 
@@ -15,6 +17,14 @@ function getItems(type) {
         .then(data => data.items);
 }
 
+function itemsFragment(items) {
+    return html`
+        <ul class="hnlist">
+            ${repeat(items, item => item.id, (props, i) => itemFragment(props))}
+        </ul>
+    `;
+}
+
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
     static get props() {
@@ -23,15 +33,12 @@ export default class NewsList extends BaseComponent {
     render({ props, state }) {
         return html`
         ${until(
-            getItems(props.type).then(items => {
-                return html`
-                    <ul class="hnlist">
-                        ${repeat(items, item => item.id, (props, i) => renderItem(props))}
-                    </ul>
-                `;
-            }),
+            getItems(props.type)
+                .then(itemsFragment)
+                .catch(errorFragment)
+            ,
             html`
-                <span>💁‍ Getting some stories...</span>
+                <span>📖 Getting some stories...</span>
             `
         )}`;
     }

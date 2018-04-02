@@ -3,27 +3,11 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
+import newsItemFragment from './fragments/news-item-fragment';
+import unrenderableFragment from './fragments/unrenderable-fragment';
+import errorFragment from './fragments/error-fragment';
 import './comment';
 import './news-item.css';
-
-export function renderItem(props, renderCommentLink = true) {
-    return html`
-        <li class="hnitem">
-            <a href="${props.url}" rel="external">
-                <h1 class="hnitem__title">${props.title}</h1>
-            </a>
-            <ul class="hnitem__metadata">
-                <li class="metadata__author">by <span>${props.by}</span></li>
-                <li class="metadata__time"><time datetime="${props.time}">${new Date(props.time * 1000)}</time></li>
-                <li class="metadata__score"><span>${props.score}</span> points</li>
-                ${renderCommentLink
-                    ? html`<li class="metadata__comments"><a href="/item/${props.id}">comments</a></li>`
-                    : ''
-                }
-            </ul>
-        </li>
-    `;
-}
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
@@ -31,6 +15,15 @@ function getArticle(id) {
     return fetch(url)
         .then(resp => resp.json())
         .then(data => data);
+}
+
+function articleFragment(article) {
+    return html`
+    <article class="hnitem">${newsItemFragment(article, false)}</article>
+    <section class="hnitem__comments">
+        ${repeat(article.kids, id => id, id => html`<hnpwa-comment id=${id} />`)}
+    </section>
+    `;
 }
 
 export default class NewsItem extends BaseComponent {
@@ -44,19 +37,17 @@ export default class NewsItem extends BaseComponent {
     }
     render({ props, state }) {
         if (!props.id) {
-            return html`<p>I can't render that, Hal.</p>`;
+            return unrenderableFragment();
         }
         return html`
         ${until(
-            getArticle(props.id).then(article =>
-                html`
-                    <article class="hnitem">${renderItem(article, false)}</article>
-                    <section class="hnitem__comments">
-                        ${repeat(article.kids, id => id, id => html`<hnpwa-comment id=${id} />`)}
-                    </section>
-                `
-            ),
-            html`📖 let's see what people have to say about this...`
+            getArticle(props.id)
+                .then(articleFragment)
+                .catch(errorFragment)
+            ,
+            html`
+                <span>🤔 let's see what people have to say about this...</span>
+            `
         )}
         `;
     }
