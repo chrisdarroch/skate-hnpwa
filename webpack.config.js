@@ -25,6 +25,7 @@ module.exports = {
           test: /\.js$/,
           include: [
             path.resolve(__dirname, "src", "client"),
+            path.resolve(__dirname, "src", "routes"),
             path.resolve(__dirname, "node_modules", "lit-html"),
           ],
           use: 'babel-loader',
