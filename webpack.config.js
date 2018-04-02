@@ -80,7 +80,8 @@ module.exports = {
       new WebpackPwaManifest({
         name: 'Skate HackerNews PWA Demo',
         short_name: 'Skate HNPWA',
-        background_color: '#f2f5eb', // todo: extract common value from CSS in to JS
+        background_color: '#f2f5eb', // todo: extract common value from CSS
+        theme_color: '#f2567c', // todo: extract common value from CSS
         filename: 'site.webmanifest',
         inject: true,
         icons: [{

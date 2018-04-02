@@ -12,7 +12,21 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-        <div id="page"></div>
+        <div id="page">
+            <noscript>
+                <p>
+                    Hey, we get it; the web is cluttered with ads, tracking cookies, useless cruft we don't
+                    need, and it's slowing us down. So it's totally understandable why you have JavaScript
+                    disabled.
+                </p>
+                <p>
+                    With that said, this site is a demonstration of how various JavaScript APIs
+                    such as <var>ServiceWorker</var> and <a href="https://skatejs.github.io">Skate.js</a>
+                    can help to make the web faster. These technologies require JavaScript in order to run.
+                    You'll not see much more than this message without it.
+                </p>
+            </noscript>
+        </div>
         <script>
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/sw.js').then(function(registration) {
