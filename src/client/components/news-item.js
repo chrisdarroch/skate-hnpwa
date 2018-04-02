@@ -9,7 +9,7 @@ import './news-item.css';
 export function renderItem(props, renderCommentLink = true) {
     return html`
         <li class="hnitem">
-            <a href="${props.url}">
+            <a href="${props.url}" rel="external">
                 <h1 class="hnitem__title">${props.title}</h1>
             </a>
             <ul class="hnitem__metadata">

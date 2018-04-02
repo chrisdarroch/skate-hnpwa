@@ -5,7 +5,7 @@ const missing = () => console.warn('No idea how to handle that route, mate!');
 
 export default {
     current: () => page.current,
-    start: () => page.start({ click: false, dispatch: true, popstate: true }),
+    start: () => page.start({ click: true, dispatch: true, popstate: true }),
     stop: () => page.stop(),
     show: (path) => page.show(path),
     handle: function (path, handler = missing) {

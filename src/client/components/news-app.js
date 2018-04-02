@@ -27,18 +27,9 @@ export default class NewsApp extends BaseComponent {
         router.handle(routes.root.path, routes.top.path);
     }
     connected() {
-        this.renderRoot.addEventListener('click', e => {
-            let el = e.target;
-            if (el && el.matches('a[href^="/"]')) {
-                const href = el.getAttribute('href');
-                router.show(href);
-                e.preventDefault();
-            }
-        });
         router.start();
     }
     disconnected() {
-        this.renderRoot.removeEventListener('click');
         router.stop();
     }
     render({ state }) {
