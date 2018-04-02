@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
-const contextPath = path.join(__dirname, 'src', 'client');
 const publicPath = path.join(__dirname, 'public');
+const contextPath = path.join(__dirname, 'src', 'client');
+const skateIconPath = path.resolve(__dirname, 'src', 'client', 'app', 'skatejs@2x.png')
 
 const extractCssPlugin = new ExtractTextPlugin('hnpwa.[name].css');
 
@@ -82,9 +84,13 @@ module.exports = {
         filename: 'site.webmanifest',
         inject: true,
         icons: [{
-          src: path.resolve(__dirname, 'src', 'client', 'app', 'skatejs@2x.png'),
+          src: skateIconPath,
           sizes: [16, 32, 64, 48, 96, 128, 256, 384, 512]
         }],
+      }),
+      new FaviconsWebpackPlugin({
+        logo: skateIconPath,
+        inject: true,
       }),
       new WorkboxWebpackPlugin.InjectManifest({
         // logistical build-time stuff
