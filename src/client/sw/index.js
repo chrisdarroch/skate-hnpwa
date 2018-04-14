@@ -20,9 +20,9 @@ workbox.routing.registerRoute(
 // the problem is this file isn't currently compiled via webpack, and
 // the google workbox plugin doesn't allow setting an entrypoint as the sw entry. Weird.
 const appRoutes = [
-    new RegExp('/'),
-    new RegExp('/(top|new|best|show|ask|job)/?'),
-    new RegExp('/item/([^/]*)/?'),
+    new RegExp('^/'),
+    new RegExp('^/(top|new|best|show|ask|job)/?'),
+    new RegExp('^/item/([^/]*)/?'),
 ];
 workbox.routing.registerNavigationRoute('/index.html', {
     whitelist: appRoutes
