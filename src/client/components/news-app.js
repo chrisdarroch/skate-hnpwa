@@ -21,7 +21,7 @@ export default class NewsApp extends BaseComponent {
 
         // Set up the routes to render stuff.
         menuItems.forEach(function({id, path}) {
-            router.handle(path, () => result(html`<hnpwa-list type="${id}" />`));
+            router.handle(`${path}/:start?`, (ctx) => result(html`<hnpwa-list type="${id}" start="${ctx.params.start}" />`));
         });
         router.handle(routes.root.path, () => result(html`<hnpwa-list type="top" />`));
         router.handle(routes.item.path, (ctx) => result(html`<hnpwa-item id="${ctx.params.id}" />`));

@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 8000;
 function respondWith(route) {
     return async (req, res, next) => {
         let { from = 0, amount = 30 } = req.query;
+        if (req.params && req.params.hasOwnProperty('from')) {
+            from = req.params.from;
+        }
         let result = await route.getItems({ from, amount });
         res.send(result);
         return next();
@@ -36,9 +39,8 @@ server.use(cors.actual);
 
 // Construct the API routes for retrieving HN story lists
 ['top', 'new', 'best', 'ask', 'show', 'job'].forEach(type => {
-    let route = `/api/${type}`;
     let router = require(`./routes/${type}`);
-    server.get(route, respondWith(router));
+    server.get(`/api/${type}/:from?`, respondWith(router));
 });
 
 // Construct a route for retrieving individual news stories

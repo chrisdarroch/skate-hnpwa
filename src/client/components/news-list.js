@@ -9,12 +9,12 @@ import errorFragment from './fragments/error-fragment';
 import './news-list.css';
 import './news-item.css';
 
-function getItems(type) {
+function getPage(type, start = 0) {
+    const offset = (start > 0) ? `/${start}` : '';
     // todo: set or inject the base URL during compilation.
-    const url = `//localhost:8000/api/${type}`;
+    const url = `//localhost:8000/api/${type}${offset}`;
     return fetch(url)
-        .then(resp => resp.json())
-        .then(data => data.items);
+        .then(resp => resp.json());
 }
 
 function itemsFragment(items) {
@@ -25,16 +25,40 @@ function itemsFragment(items) {
     `;
 }
 
+function paginationFragment(type, data) {
+    const { start, end, amount, total } = data;
+    const prevUrl = `/${type}/${start - amount}`;
+    const nextUrl = `/${type}/${end}`;
+
+    return html`
+    <nav role="navigation" aria-label="Pagination navigation">
+        <p>Showing ${start} to ${end} of ${total} stories.</p>
+        <ul>
+            <li><a href="${prevUrl}" aria-label="Show ${start - amount} to ${start}">Previous</a></li>
+            <li><a href="${nextUrl}" aria-label="Show ${end} to ${end + amount}">Ńext</a></li>
+        </ul>
+    </nav>
+    `;
+}
+
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
     static get props() {
-        return { type: props.string };
+        return {
+            type: props.string,
+            start: props.number,
+        };
     }
     render({ props, state }) {
         return html`
         ${until(
-            getItems(props.type)
-                .then(itemsFragment)
+            getPage(props.type, props.start)
+                .then(data => {
+                    return html`
+                        ${itemsFragment(data.items)}
+                        ${paginationFragment(props.type, data)}
+                    `;
+                })
                 .catch(errorFragment)
             ,
             html`
