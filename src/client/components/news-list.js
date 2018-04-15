@@ -27,15 +27,22 @@ function itemsFragment(items) {
 
 function paginationFragment(type, data) {
     const { start, end, amount, total } = data;
-    const prevUrl = `/${type}/${start - amount}`;
+    const prev = start - amount;
+    const atStart = (prev < 0);
+    const atEnd = (end >= total);
+
+    const prevUrl = prev ? `/${type}/${prev}` : `/${type}`;
     const nextUrl = `/${type}/${end}`;
+
+    let prevLink = html`<a href="${prevUrl}" aria-label="Show ${prev} to ${start}">Previous</a>`;
+    let nextLink = html`<a href="${nextUrl}" aria-label="Show ${end} to ${end + amount}">Ńext</a>`;
 
     return html`
     <nav role="navigation" aria-label="Pagination navigation">
-        <p>Showing ${start} to ${end} of ${total} stories.</p>
+        <p>Showing ${start + 1} to ${end} of ${total} stories.</p>
         <ul>
-            <li><a href="${prevUrl}" aria-label="Show ${start - amount} to ${start}">Previous</a></li>
-            <li><a href="${nextUrl}" aria-label="Show ${end} to ${end + amount}">Ńext</a></li>
+            <li>${atStart ? html`Previous` : prevLink}</li>
+            <li>${atEnd   ? html`Next`     : nextLink}</li>
         </ul>
     </nav>
     `;
