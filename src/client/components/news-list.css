@@ -7,3 +7,30 @@
 .hnlist .hnitem {
     padding: 0;
 }
+
+.hnpage {
+    font-size: smaller;
+    text-align: center;
+    margin: 1em 3em 0;
+}
+
+.hnpage__links {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hnpage__links > * {
+    margin: 0;
+    padding: 0;
+}
+
+.hnpage__links--prev {
+    order: -1;
+}
+
+.hnpage__links--next {
+    order: 1;
+}

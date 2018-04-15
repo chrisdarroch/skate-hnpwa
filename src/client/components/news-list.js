@@ -38,11 +38,11 @@ function paginationFragment(type, data) {
     let nextLink = html`<a href="${nextUrl}" aria-label="Show ${end} to ${end + amount}">Ńext</a>`;
 
     return html`
-    <nav role="navigation" aria-label="Pagination navigation">
-        <p>Showing ${start + 1} to ${end} of ${total} stories.</p>
-        <ul>
-            <li>${atStart ? html`Previous` : prevLink}</li>
-            <li>${atEnd   ? html`Next`     : nextLink}</li>
+    <nav class="hnpage" role="navigation" aria-label="Pagination navigation">
+        <p class="hnpage__showing">Showing ${start + 1} to ${end} of ${total} stories.</p>
+        <ul class="hnpage__links">
+            <li class="hnpage__links--prev">${atStart ? html`The beginning` : prevLink}</li>
+            <li class="hnpage__links--next">${atEnd   ? html`The end`       : nextLink}</li>
         </ul>
     </nav>
     `;
