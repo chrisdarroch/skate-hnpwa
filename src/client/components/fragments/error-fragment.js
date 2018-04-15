@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 import { until } from 'lit-html/lib/until';
 
 const handler = (err) => html`
-    <p>😭 Hmm, something went wrong.</p>
+    <p class="error">😭 Hmm, something went wrong.</p>
     <p>You may be offline... I just haven't handled the exact problem yet to tell you what happened.</p>
     ${err ? html`
         <p>In the meantime, you'll get the cryptic errors below.</p>

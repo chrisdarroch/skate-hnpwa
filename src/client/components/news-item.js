@@ -50,7 +50,7 @@ export default class NewsItem extends BaseComponent {
                 .catch(errorFragment)
             ,
             html`
-                <span>🤔 let's see what people have to say about this...</span>
+                <p class="loading">📖 let's see what people have to say about this...</p>
             `
         )}
         `;

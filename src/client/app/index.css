@@ -39,6 +39,15 @@ hnpwa-app, hnpwa-list, hnpwa-item, hnpwa-comment {
     display: block;
 }
 
+.loading {
+    font-style: italic;
+}
+
+.error {
+    color: #8b3248;
+    font-weight: bolder;
+}
+
 @media screen and (min-width: 36rem) {
     body {
         font-size: 1.2rem;

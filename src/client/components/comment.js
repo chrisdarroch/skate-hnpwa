@@ -50,7 +50,9 @@ export default class Comment extends BaseComponent {
                     </div>
                 `;
             }),
-            html`📖 let's see what people said in response...`
+            html`
+                <p class="loading">🤔 let's see what people said in response...</p>
+            `
         )}
         `;
     }

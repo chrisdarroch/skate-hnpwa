@@ -74,7 +74,7 @@ export default class NewsList extends BaseComponent {
                 .catch(errorFragment)
             ,
             html`
-                <span>📖 Getting some stories...</span>
+                <p class="loading">📚 Getting some stories...</p>
             `
         )}`;
     }

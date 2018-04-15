@@ -10,7 +10,7 @@ import './news-app.css';
 export default class NewsApp extends BaseComponent {
     static is = 'hnpwa-app'
     state = {
-        result: html`<p>Awaiting orders</p>`,
+        result: html`<p class="loading">Awaiting orders</p>`,
     }
     constructor() {
         super();
