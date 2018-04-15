@@ -14,7 +14,12 @@ function getPage(type, start = 0) {
     // todo: set or inject the base URL during compilation.
     const url = `//localhost:8000/api/${type}${offset}`;
     return fetch(url)
-        .then(resp => resp.json());
+        .then(resp => {
+            if (!resp.status || resp.status >= 400) {
+                throw resp.json();
+            }
+            return resp.json();
+        });
 }
 
 function itemsFragment(items) {

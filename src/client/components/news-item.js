@@ -13,8 +13,12 @@ function getArticle(id) {
     // todo: set or inject the base URL during compilation.
     const url = `//localhost:8000/api/item/${id}`;
     return fetch(url)
-        .then(resp => resp.json())
-        .then(data => data);
+        .then(resp => {
+            if (!resp.status || resp.status >= 400) {
+                throw resp.json();
+            }
+            return resp.json();
+        });
 }
 
 function articleFragment(article) {

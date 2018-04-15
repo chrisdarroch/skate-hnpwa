@@ -13,8 +13,13 @@ function respondWith(route) {
         if (req.params && req.params.hasOwnProperty('from')) {
             from = req.params.from;
         }
-        let result = await route.getItems({ from, amount });
-        res.send(result);
+        try {
+            let result = await route.getItems({ from, amount });
+            res.send(result);
+        } catch (e) {
+            console.error("something went wrong serving the request for", req.getUrl().href, e);
+            res.send(500, {message: e.message});
+        }
         return next();
     }
 }
@@ -41,14 +46,20 @@ server.use(cors.actual);
 ['top', 'new', 'best', 'ask', 'show', 'job'].forEach(type => {
     let router = require(`./routes/${type}`);
     server.get(`/api/${type}/:from?`, respondWith(router));
+    server.get(`/api/${type}`, respondWith(router));
 });
 
 // Construct a route for retrieving individual news stories
 server.get('/api/item/:id', async (req, res, next) => {
     let getItem = require('./routes/item');
-    let item = getItem(req.params.id);
-    let result = await item.getArticle();
-    res.send(result);
+    try {
+        let item = getItem(req.params.id);
+        let result = await item.getArticle();
+        res.send(result);
+    } catch (e) {
+        console.error("something went wrong serving the request for", req.getUrl().href, e);
+        res.send(500, {message: e.message});
+    }
     return next();
 });
 
