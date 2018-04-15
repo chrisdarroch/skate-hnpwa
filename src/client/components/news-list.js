@@ -9,12 +9,12 @@ import errorFragment from './fragments/error-fragment';
 import './news-list.css';
 import './news-item.css';
 
-function getItems(type) {
+function getPage(type, start = 0) {
+    const offset = (start > 0) ? `/${start}` : '';
     // todo: set or inject the base URL during compilation.
-    const url = `//localhost:8000/api/${type}`;
+    const url = `//localhost:8000/api/${type}${offset}`;
     return fetch(url)
-        .then(resp => resp.json())
-        .then(data => data.items);
+        .then(resp => resp.json());
 }
 
 function itemsFragment(items) {
@@ -25,16 +25,47 @@ function itemsFragment(items) {
     `;
 }
 
+function paginationFragment(type, data) {
+    const { start, end, amount, total } = data;
+    const prev = start - amount;
+    const atStart = (prev < 0);
+    const atEnd = (end >= total);
+
+    const prevUrl = prev ? `/${type}/${prev}` : `/${type}`;
+    const nextUrl = `/${type}/${end}`;
+
+    let prevLink = html`<a href="${prevUrl}" aria-label="Show ${prev} to ${start}">Previous</a>`;
+    let nextLink = html`<a href="${nextUrl}" aria-label="Show ${end} to ${end + amount}">Ńext</a>`;
+
+    return html`
+    <nav class="hnpage" role="navigation" aria-label="Pagination navigation">
+        <p class="hnpage__showing">Showing ${start + 1} to ${end} of ${total} stories.</p>
+        <ul class="hnpage__links">
+            <li class="hnpage__links--prev">${atStart ? html`The beginning` : prevLink}</li>
+            <li class="hnpage__links--next">${atEnd   ? html`The end`       : nextLink}</li>
+        </ul>
+    </nav>
+    `;
+}
+
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
     static get props() {
-        return { type: props.string };
+        return {
+            type: props.string,
+            start: props.number,
+        };
     }
     render({ props, state }) {
         return html`
         ${until(
-            getItems(props.type)
-                .then(itemsFragment)
+            getPage(props.type, props.start)
+                .then(data => {
+                    return html`
+                        ${itemsFragment(data.items)}
+                        ${paginationFragment(props.type, data)}
+                    `;
+                })
                 .catch(errorFragment)
             ,
             html`
