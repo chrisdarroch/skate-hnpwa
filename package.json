@@ -20,7 +20,7 @@
   "scripts": {
     "client/build": "webpack -p",
     "client/watch": "webpack --watch",
-    "client/run": "http-server -p 8080 ./public",
+    "client/run": "http-server -p 8080 -c0 ./public",
     "clean": "./bin/clean.sh",
     "server/build": "babel --out-dir node/server src/server",
     "server/run": "PORT=8000 node node/server/index.js",
