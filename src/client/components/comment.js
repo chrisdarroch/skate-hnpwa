@@ -3,7 +3,7 @@ import { repeat } from 'lit-html/lib/repeat';
 import { until } from 'lit-html/lib/until';
 import { define, props } from 'skatejs';
 import BaseComponent from './base-component';
-import './comment.css';
+import commentStyles from 'raw-loader!./comment.css';
 import unrenderableFragment from './fragments/unrenderable-fragment';
 import timeFragment from './fragments/time-fragment';
 
@@ -26,6 +26,7 @@ function renderReplies(article) {
 
 export default class Comment extends BaseComponent {
     static is = 'hnpwa-comment'
+    static styles = commentStyles
     static get props() {
         return { id: props.id };
     }

@@ -7,7 +7,7 @@ import newsItemFragment from './fragments/news-item-fragment';
 import unrenderableFragment from './fragments/unrenderable-fragment';
 import errorFragment from './fragments/error-fragment';
 import './comment';
-import './news-item.css';
+import itemStyles from 'raw-loader!./news-item.css';
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
@@ -32,6 +32,7 @@ function articleFragment(article) {
 
 export default class NewsItem extends BaseComponent {
     static is = 'hnpwa-item'
+    static styles = itemStyles
     static get props() {
         return {
             id: props.id,

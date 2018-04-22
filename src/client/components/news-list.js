@@ -6,8 +6,8 @@ import BaseComponent from './base-component';
 import NewsItem from './news-item';
 import itemFragment from './fragments/news-item-fragment';
 import errorFragment from './fragments/error-fragment';
-import './news-list.css';
-import './news-item.css';
+import listStyles from 'raw-loader!./news-list.css';
+import itemStyles from 'raw-loader!./news-item.css';
 
 function getPage(type, start = 0) {
     const offset = (start > 0) ? `/${start}` : '';
@@ -55,6 +55,10 @@ function paginationFragment(type, data) {
 
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
+    static styles = `
+        ${listStyles}
+        ${itemStyles}
+    `
     static get props() {
         return {
             type: props.string,

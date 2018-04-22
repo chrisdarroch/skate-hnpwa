@@ -5,10 +5,22 @@ import NewsList from './news-list';
 import NewsItem from './news-item';
 import { menuItems, routes } from '../routing/routes';
 import router from '../routing/router';
-import './news-app.css';
+import appStyles from 'raw-loader!./news-app.css';
+
+function menuItemListFragments(menuItems) {
+    return menuItems.map(({title, path}) => {
+        let selected = (router.current === path);
+        return html`
+        <li>
+            <a class="${selected ? 'selected' : '' }" href="${path}">${title}</a>
+        </li>
+        `
+    });
+}
 
 export default class NewsApp extends BaseComponent {
     static is = 'hnpwa-app'
+    static styles = appStyles
     state = {
         result: html`<p class="loading">Awaiting orders</p>`,
     }
@@ -37,14 +49,7 @@ export default class NewsApp extends BaseComponent {
         <header id="header">
             <nav id="navigation">
                 <ul>
-                    ${menuItems.map(({title, path}) => {
-                        let selected = (router.current === path);
-                        return html`
-                        <li>
-                            <a class="${selected ? 'selected' : '' }" href="${path}">${title}</a>
-                        </li>
-                        `
-                    })}
+                    ${menuItemListFragments(menuItems)}
                 </ul>
             </nav>
         </header>

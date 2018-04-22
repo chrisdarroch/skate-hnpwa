@@ -36,7 +36,7 @@ module.exports = {
           use: 'babel-loader',
         },
         {
-          test: /\.css$/,
+          test: /app\/.*\.css$/,
           use: extractCssPlugin.extract({
             fallback: 'style-loader',
             use: [
