@@ -26,6 +26,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         'main': ['babel-polyfill', './index.js'],
+        'sw': ['./sw/index.js'],
     },
     module: {
         rules: [
@@ -70,6 +71,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             cache: true,
             template: 'index.html',
+            excludeChunks: ['sw'],
         }),
         new WebpackPwaManifest({
             name: 'Skate HackerNews PWA Demo',
@@ -95,10 +97,6 @@ module.exports = {
             swDest: 'sw.js',
             importWorkboxFrom: 'local', // not that I distrust Google's CDN, but I want all the files in one place for now.
             excludeChunks: ['sw'],
-            exclude: [
-                /\.map$/,
-                /asset-manifest\.json$/,
-            ],
             // runtime stuff
             swSrc: path.resolve(__dirname, 'src', 'client', 'sw', 'index.js'),
             // ...and that's it; inject manifest == DIY!
