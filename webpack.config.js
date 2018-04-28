@@ -74,8 +74,11 @@ module.exports = {
         new WebpackPwaManifest({
             name: 'Skate HackerNews PWA Demo',
             short_name: 'Skate HNPWA',
+            description: "The HNPWA app built using Skate.js, Google lit-html, and Google workbox.",
+            display: "standalone",
             background_color: '#f2f5eb', // todo: extract common value from CSS
             theme_color: '#f2567c', // todo: extract common value from CSS
+            start_url: "/",
             filename: 'site.webmanifest',
             inject: true,
             icons: [{
