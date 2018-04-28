@@ -10,8 +10,9 @@ const app = new Koa();
 const router = new KoaRouter();
 
 // Construct the API routes for retrieving HN story lists
+const getList = require(`./routes/list`);
 ['top', 'new', 'best', 'ask', 'show', 'job'].forEach(type => {
-    const handler = require(`./routes/${type}`);
+    const handler = getList(type);
     const responder = async (ctx, next) => {
         let req = ctx.request;
         let res = ctx.response;
