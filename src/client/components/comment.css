@@ -5,3 +5,16 @@
 .hncomment__replies {
     margin-left: 2em;
 }
+
+.hncomment--error {
+    display: flex;
+}
+
+.hncomment--error .error {
+    margin: 0;
+    font-size: smaller;
+}
+
+.hncomment__action {
+    -webkit-appearance: none;
+}
