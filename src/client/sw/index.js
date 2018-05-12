@@ -8,7 +8,7 @@ workbox.clientsClaim();
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
-    /^http:\/\/localhost:8000\/api\//,
+    new RegExp(`^/api/`),
     workbox.strategies.staleWhileRevalidate({
         cacheName: "skate-hnpwa-data",
         plugins: []

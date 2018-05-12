@@ -9,7 +9,7 @@ import timeFragment from './fragments/time-fragment';
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
-    const url = `//localhost:8000/api/item/${id}`;
+    const url = `/api/item/${id}`;
     return fetch(url)
         .then(resp => resp.json())
         .then(data => data);

@@ -11,8 +11,7 @@ import './news-item.css';
 
 function getPage(type, start = 0) {
     const offset = (start > 0) ? `/${start}` : '';
-    // todo: set or inject the base URL during compilation.
-    const url = `//localhost:8000/api/${type}${offset}`;
+    const url = `/api/${type}${offset}`;
     return fetch(url)
         .then(resp => {
             if (!resp.status || resp.status >= 400) {
