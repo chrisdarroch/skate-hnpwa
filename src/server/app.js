@@ -1,5 +1,8 @@
 const Koa = require('koa');
 const KoaRouter = require('koa-router');
+const KoaStatic = require('koa-static');
+const path = require('path');
+
 const PORT = process.env.PORT || 8080;
 
 // Spin some things up
@@ -48,6 +51,12 @@ const router = new KoaRouter();
         await next();
     };
     router.get('/api/item/:id', responder);
+}());
+
+// Serve the index page and raw assets
+(function() {
+    const staticFolder = path.resolve(process.cwd(), 'public');
+    app.use(KoaStatic(staticFolder));
 }());
 
 // middleware: x-response-time

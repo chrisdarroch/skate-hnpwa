@@ -13,6 +13,7 @@
     "@skatejs/renderer-lit-html": "^0.1.1",
     "koa": "^2.5.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
     "node-cache": "^4.1.1",
     "node-fetch": "^1.7.3",
     "page": "^1.8.6",
