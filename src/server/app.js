@@ -50,6 +50,22 @@ const router = new KoaRouter();
     router.get('/api/item/:id', responder);
 }());
 
+// middleware: x-response-time
+app.use(async (ctx, next) => {
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    ctx.set('X-Response-Time', `${ms}ms`);
+});
+
+// middleware: logger
+app.use(async (ctx, next) => {
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    console.log(`${ctx.method} ${ctx.url} - HTTP ${ctx.response.status} - ${ms}ms`);
+});
+
 // Register all the things
 app.use(router.routes())
 app.use(router.allowedMethods());
