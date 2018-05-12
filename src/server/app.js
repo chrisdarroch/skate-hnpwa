@@ -16,8 +16,8 @@ const router = new KoaRouter();
         let req = ctx.request;
         let res = ctx.response;
         let { from = 0, amount = 30 } = req.query;
-        if (req.params && req.params.hasOwnProperty('from')) {
-            from = req.params.from;
+        if (ctx.params && ctx.params.hasOwnProperty('from')) {
+            from = ctx.params.from;
         }
         try {
             let result = await handler.getItems({ from, amount });
@@ -40,7 +40,7 @@ const router = new KoaRouter();
         let req = ctx.request;
         let res = ctx.response;
         try {
-            let item = getItem(req.params.id);
+            let item = getItem(ctx.params.id);
             let result = await item.getArticle();
             res.body = result;
         } catch (e) {

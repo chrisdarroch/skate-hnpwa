@@ -26,7 +26,7 @@
     "client/run": "http-server -p 8080 -c0 ./public",
     "clean": "./bin/clean.sh",
     "server/build": "babel --out-dir node/server src/server",
-    "server/run": "PORT=8000 node node/server/index.js",
+    "server/run": "PORT=8080 node node/server/app.js",
     "start": "NODE_ENV=production ./bin/startup.sh",
     "start/dev": "./bin/startup.sh"
   },
