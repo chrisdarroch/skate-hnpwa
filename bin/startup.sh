@@ -7,5 +7,4 @@ else
     yarn client/watch &
 fi
 
-yarn server/run &
-yarn client/run
+yarn server/run

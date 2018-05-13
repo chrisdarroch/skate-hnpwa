@@ -11,7 +11,7 @@ import './news-item.css';
 
 function getArticle(id) {
     // todo: set or inject the base URL during compilation.
-    const url = `//localhost:8000/api/item/${id}`;
+    const url = `/api/item/${id}`;
     return fetch(url)
         .then(resp => {
             if (!resp.status || resp.status >= 400) {
