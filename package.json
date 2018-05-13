@@ -17,7 +17,6 @@
     "node-cache": "^4.1.1",
     "node-fetch": "^1.7.3",
     "page": "^1.8.6",
-    "restify": "^6.3.4",
     "skatejs": "^5.1.1"
   },
   "scripts": {
@@ -53,7 +52,6 @@
     "lit-html": "^0.7.1",
     "postcss-loader": "^2.0.9",
     "precss": "^2.0.0",
-    "restify-cors-middleware": "^1.0.1",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-pwa-manifest": "^3.6.2",
