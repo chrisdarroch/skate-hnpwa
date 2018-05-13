@@ -27,7 +27,8 @@
     "server/build": "babel --out-dir node/server src/server",
     "server/run": "PORT=8080 node node/server/app.js",
     "start": "NODE_ENV=production ./bin/startup.sh",
-    "start/dev": "./bin/startup.sh"
+    "start/dev": "./bin/startup.sh",
+    "heroku-postbuild": "yarn server/build && yarn client/build"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.2",
