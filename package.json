@@ -25,9 +25,9 @@
     "client/run": "http-server -p 8080 -c0 ./public",
     "clean": "./bin/clean.sh",
     "server/build": "babel --out-dir node/server src/server",
-    "server/run": "PORT=8080 node node/server/app.js",
+    "server/run": "node node/server/app.js",
     "start": "NODE_ENV=production ./bin/startup.sh",
-    "start/dev": "./bin/startup.sh",
+    "start/dev": "PORT=8080 ./bin/startup.sh",
     "heroku-postbuild": "yarn server/build && yarn client/build"
   },
   "devDependencies": {
