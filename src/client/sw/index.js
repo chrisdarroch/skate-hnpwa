@@ -17,6 +17,12 @@ workbox.routing.registerRoute(
     new RegExp(`^${baseUrl}/api/item/(\\d+)`),
     workbox.strategies.cacheFirst({
         cacheName: ourCacheNames.ITEMS,
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxAgeSeconds: 60 * 60 * 24 * 3,
+                maxEntries: 400,
+            }),
+        ]
     }),
     'GET'
 );
@@ -26,6 +32,9 @@ workbox.routing.registerRoute(
     workbox.strategies.staleWhileRevalidate({
         cacheName: ourCacheNames.LISTS,
         plugins: [
+            new workbox.expiration.Plugin({
+                maxAgeSeconds: 60 * 60 * 24 * 1,
+            }),
             new workbox.cacheableResponse.Plugin({
                 statuses: [200]
             }),
