@@ -2,6 +2,7 @@ const Koa = require('koa');
 const KoaRouter = require('koa-router');
 const KoaStatic = require('koa-static');
 const KoaEnforceHttps = require('koa-sslify');
+const KoaCompress = require('koa-compress');
 const path = require('path');
 
 const PORT = process.env.PORT || 8080;
@@ -56,10 +57,19 @@ const getList = require(`./routes/list`);
     router.get('/api/item/:id', responder);
 }());
 
+// middleware: compress resources via gzip
+app.use(KoaCompress({
+    threshold: 2048,
+    flush: require('zlib').Z_SYNC_FLUSH
+}));
+
 // Serve the index page and raw assets
 (function() {
     const staticFolder = path.resolve(process.cwd(), 'public');
-    app.use(KoaStatic(staticFolder));
+    app.use(KoaStatic(staticFolder, {
+        gzip: true,
+        br: true,
+    }));
 }());
 
 // middleware: enforce HTTPS

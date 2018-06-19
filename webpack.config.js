@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -91,6 +92,9 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: skateIconPath,
             inject: true,
+        }),
+        new CompressionWebpackPlugin({
+            algorithm: 'gzip'
         }),
         new WorkboxWebpackPlugin.InjectManifest({
             // logistical build-time stuff
