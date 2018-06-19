@@ -25,7 +25,7 @@ function articleFragment(article) {
     return html`
     <article class="hnitem">${newsItemFragment(article, false)}</article>
     <section class="hnitem__comments">
-        ${repeat(article.kids, id => id, id => html`<hnpwa-comment id=${id} />`)}
+        ${repeat(article.kids || [], id => id, id => html`<hnpwa-comment id=${id} />`)}
     </section>
     `;
 }
