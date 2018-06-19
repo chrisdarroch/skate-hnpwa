@@ -1,9 +1,11 @@
 const Koa = require('koa');
 const KoaRouter = require('koa-router');
 const KoaStatic = require('koa-static');
+const KoaEnforceHttps = require('koa-sslify');
 const path = require('path');
 
 const PORT = process.env.PORT || 8080;
+const PROD = process.env.NODE_ENV === 'production';
 
 // Spin some things up
 const app = new Koa();
@@ -58,6 +60,14 @@ const getList = require(`./routes/list`);
 (function() {
     const staticFolder = path.resolve(process.cwd(), 'public');
     app.use(KoaStatic(staticFolder));
+}());
+
+// middleware: enforce HTTPS
+(function() {
+    if (!PROD) return;
+    app.use(KoaEnforceHttps({
+        trustProtoHeader: true
+    }));
 }());
 
 // middleware: x-response-time
