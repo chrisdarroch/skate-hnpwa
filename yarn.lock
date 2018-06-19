@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@skatejs/renderer-lit-html@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@skatejs/renderer-lit-html/-/renderer-lit-html-0.1.1.tgz#c7fbb03041bb6b7b4010c39ef97c28bee0ce10dd"
+"@skatejs/renderer-lit-html@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@skatejs/renderer-lit-html/-/renderer-lit-html-0.2.0.tgz#3cdf51c0574faece41b06b7ba88618cfaaa67282"
 
 "@webassemblyjs/ast@1.5.9":
   version "1.5.9"
@@ -3267,9 +3267,9 @@ leb@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/leb/-/leb-0.3.0.tgz#32bee9fad168328d6aea8522d833f4180eed1da3"
 
-lit-html@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.7.1.tgz#61785045cf84f9ee955fa078c2985b52b765ad16"
+lit-html@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"
 
 load-bmfont@^1.2.3:
   version "1.3.0"

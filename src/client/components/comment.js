@@ -55,8 +55,8 @@ function retryCommentFragment(err) {
 
 export default class Comment extends BaseComponent {
     static is = 'hnpwa-comment'
-    static get props() {
-        return { id: props.id };
+    static props = {
+        id: props.number
     }
     connected() {
         this.__retryHandler = e => {

@@ -54,11 +54,9 @@ function paginationFragment(type, data) {
 
 export default class NewsList extends BaseComponent {
     static is = 'hnpwa-list'
-    static get props() {
-        return {
-            type: props.string,
-            start: props.number,
-        };
+    static props = {
+        type: props.string,
+        start: props.number,
     }
     render({ props, state }) {
         return html`

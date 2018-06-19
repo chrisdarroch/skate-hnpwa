@@ -32,12 +32,10 @@ function articleFragment(article) {
 
 export default class NewsItem extends BaseComponent {
     static is = 'hnpwa-item'
-    static get props() {
-        return {
-            id: props.id,
-            title: props.string,
-            url: props.string,
-        };
+    static props = {
+        id: props.number,
+        title: props.string,
+        url: props.string,
     }
     render({ props, state }) {
         if (!props.id) {
