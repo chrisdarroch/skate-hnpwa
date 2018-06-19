@@ -39,22 +39,19 @@ workbox.routing.registerRoute(
                 statuses: [200]
             }),
             {
-            // Take the collection of items returned in the list response, then individually
-            // cache each item in the collection.
-            // todo: set appropriate cache + date headers in the request and response objects.
-            // note: I'm using cacheWillUpdate instead of cacheDidUpdate because of a bug in workbox.
-            // see: https://github.com/GoogleChrome/workbox/issues/1515
-            cacheWillUpdate: babelHelpers.asyncToGenerator(
-                function* ({ request, response }) {
-                    const cachedResponse = response && response.clone();
+                // Take the collection of items returned in the list response, then individually
+                // cache each item in the collection.
+                // todo: set appropriate cache + date headers in the request and response objects.
+                cacheDidUpdate: async ({ request, cacheName }) => {
+                    const cachedResponse = await caches.match(request, { cacheName });
                     if (!cachedResponse) {
                         return;
                     }
 
-                    const newResponse = cachedResponse.clone()
-                    const data = yield cachedResponse.json();
+                    const newResponse = cachedResponse.clone();
+                    const data = await cachedResponse.json();
                     if (data && data.items) {
-                        const cache = yield caches.open(ourCacheNames.ITEMS);
+                        const cache = await caches.open(ourCacheNames.ITEMS);
                         for (let i = 0, ii = data.items.length; i < ii; i++) {
                             let item = data.items[i];
                             let body = JSON.stringify(item);
@@ -75,11 +72,9 @@ workbox.routing.registerRoute(
                             cache.put(req, res);
                         }
                     }
-
-                    return newResponse;
                 }
-            ),
-        }]
+            }
+        ]
     }),
     'GET'
 );
